@@ -1,0 +1,180 @@
+/* admin.css */
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+
+.admin-container {
+  padding: 32px;
+  max-width: 1400px;
+  margin: auto;
+}
+
+.admin-header {
+  margin-bottom: 32px;
+}
+
+.admin-header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.admin-header p {
+  margin-top: 6px;
+  color: #666;
+}
+
+/* NAV */
+.admin-nav {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.admin-nav button {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+}
+
+.admin-nav button:hover {
+  transform: translateY(-1px);
+}
+.admin-nav button.active {
+  background: #111;
+  color: white;
+  border-color: #111;
+  transform: scale(0.98);
+
+}
+
+.admin-nav .logout {
+  margin-left: auto;
+  background: #fff;
+  color: #c0392b;
+  border-color: #e5e5e5;
+}
+
+/* KPI GRID */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+/* SECTION */
+.admin-section {
+  margin-bottom: 48px;
+}
+
+.section-title {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+/* CHART GRID */
+.chart-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+
+/* Card */
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+
+/* Analytics ↔ Inquiries */
+
+.fade-in {
+  animation: fadeIn 0.25s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sidebar + Layout styling */
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f7f9fb;
+}
+
+.admin-sidebar {
+  width: 240px;
+  background: #111827;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-sidebar .logo {
+  margin-bottom: 30px;
+  font-size: 18px;
+}
+
+.admin-sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.nav-link {
+  color: #9ca3af;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.nav-link.active {
+  background: #1f2933;
+  color: white;
+}
+
+.logout-btn {
+  margin-top: auto;
+  background: #dc2626;
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.admin-content {
+  flex: 1;
+  padding: 30px;
+}
+
+
+@media (max-width: 900px) {
+  .chart-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-container {
+    padding: 20px;
+  }
+}
