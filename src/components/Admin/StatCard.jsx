@@ -1,22 +1,14 @@
 const StatCard = ({ title, value, subtitle }) => {
   return (
-    <div
-    className="stat-card"
-      style={{
-        background: "#fff",
-        borderRadius: 12,
-        padding: 20,
-        boxShadow: "0 4px 12px rgba(0,0,0,0.04)",
-        transition: "all 0.2s ease",
-        cursor: "default",
-      }}
-    >
-      <p style={{ fontSize: 12, color: "#777", marginBottom: 6 }}>
+    <div className="bg-white rounded-lg shadow-sm p-4 sm:p-5 transition-all duration-150 cursor-default">
+      <p className="text-xs text-gray-500 mb-1">
         {title}
       </p>
-      <h2 style={{ margin: 0 }}>{value}</h2>
+      <h2 className="text-lg sm:text-2xl font-semibold text-gray-900 m-0">
+        {value}
+      </h2>
       {subtitle && (
-        <p style={{ fontSize: 12, color: "#999", marginTop: 6 }}>
+        <p className="text-xs text-gray-400 mt-1">
           {subtitle}
         </p>
       )}

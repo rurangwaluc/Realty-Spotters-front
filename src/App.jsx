@@ -1,10 +1,13 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminInquiries from "./pages/AdminInquiries";
-import AdminLayout from "./components/Layout/AdminLayout";
+import AdminLayout from "./components/Layout/AdminLayout"; // This should be just layout, not Router
 import AdminLogin from "./pages/AdminLogin";
+import AdminRoute from "./routes/AdminRoute";
+import Help from './pages/Help'; // adjust path if needed
 import Landing from "./pages/Landing";
+import Navbar from "./components/Layout/Navbar"; // Same here, just a navigation component, not a Router
 import Search from "./pages/Search";
 import { useState } from "react";
 
@@ -14,28 +17,37 @@ function App() {
   );
 
   return (
-    <Routes>
-      {/* Public */}
-      <Route path="/" element={<Landing />} />
-      <Route path="/search" element={<Search />} />
+    <div>
+      {/* Only one Router should wrap the entire app */}
 
-      {/* Admin login */}
-      <Route
-        path="/admin/login"
-        element={<AdminLogin onSuccess={() => setAdminAuthed(true)} />}
-      />
+      <Navbar /> {/* Ensure Navbar is just a layout component, not a Router */}
+      <Routes>
+        {/* Public routes */}
+        <Route path="/" element={<Landing />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/inquiry" element={<Help />} />
 
-      {/* Protected admin */}
-      <Route
-        path="/admin"
-        element={
-          adminAuthed ? <AdminLayout /> : <Navigate to="/admin/login" />
-        }
-      >
-        <Route path="dashboard" element={<AdminDashboard />} />
-        <Route path="inquiries" element={<AdminInquiries />} />
-      </Route>
-    </Routes>
+        {/* Admin login */}
+        <Route
+          path="/admin/login"
+          element={<AdminLogin onSuccess={() => setAdminAuthed(true)} />}
+        />
+
+        {/* Protected admin routes */}
+        <Route
+          path="/admin"
+          element={adminAuthed ? <AdminLayout /> : <Navigate to="/admin/login" />}
+        >
+          <Route path="dashboard" element={
+            <AdminRoute>
+              <AdminDashboard />
+            </AdminRoute>
+            
+            } />
+          <Route path="inquiries" element={<AdminInquiries />} />
+        </Route>
+      </Routes>
+    </div>
   );
 }
 
