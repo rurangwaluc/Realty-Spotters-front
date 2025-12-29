@@ -21,47 +21,45 @@ const AdminDashboard = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const [days, setDays] = useState("all"); // "all" | 7 | 30
-    const [view, setView] = useState("analytics");
+  const [view, setView] = useState("analytics");
 
+  // UI toggles for mobile-friendly collapsible sections
+  const [revenueOpen, setRevenueOpen] = useState(true);
+  const [chartsOpen, setChartsOpen] = useState(true);
+  const [listOpen, setListOpen] = useState(true);
 
-   useEffect(() => {
-  let isMounted = true;
+  useEffect(() => {
+    let isMounted = true;
 
-  const loadData = async () => {
-    setLoading(true);
-    setError("");
+    const loadData = async () => {
+      setLoading(true);
+      setError("");
 
-    try {
-      const result =
-        days === "all"
-          ? await fetchAdminAnalytics()
-          : await fetchAdminAnalyticsByDate(days);
+      try {
+        const result =
+          days === "all" ? await fetchAdminAnalytics() : await fetchAdminAnalyticsByDate(days);
 
-      if (isMounted) {
-        setData(result);
+        if (isMounted) {
+          setData(result);
+        }
+      } catch (err) {
+        if (isMounted) {
+          console.error("Error loading analytics:", err);
+          setError("Failed to load analytics");
+        }
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
       }
-    } catch (err) {
-      if (isMounted) {
-        console.error("Error loading analytics:", err);  // Log the error to the console
-        setError("Failed to load analytics");
-      }
-    } finally {
-      if (isMounted) {
-        setLoading(false);
-      }
-    }
-  };
+    };
 
-  loadData();
+    loadData();
 
-  return () => {
-    isMounted = false;
-  };
-}, [days]);
-
-
-
-
+    return () => {
+      isMounted = false;
+    };
+  }, [days]);
 
   if (loading) return <AdminSkeleton />;
 
@@ -78,62 +76,63 @@ const AdminDashboard = () => {
   const { searches, payments } = data;
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white p-4 sm:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
-        {/* HEADER */}
+        {/* Header */}
         <header className="mb-6">
-          <h1 className="text-2xl font-extrabold text-gray-900">📊 Realty Spotters — Admin Dashboard</h1>
-          <p className="text-sm text-gray-600">Live demand and revenue intelligence</p>
-        </header>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 flex items-center gap-3">
+                <span className="inline-block px-2 py-1 rounded bg-indigo-600 text-white text-sm">Admin</span>
+                Realty Spotters — Analytics
+              </h1>
+              <p className="mt-1 text-sm text-gray-600">Live demand, revenue and priority insights — mobile-first admin view.</p>
+            </div>
 
-        {/* NAV */}
-        <nav className="flex items-center gap-3 mb-6 overflow-x-auto">
-          <button
-            className={`px-3 py-2 rounded-md text-sm font-medium whitespace-nowrap ${view === "analytics" ? 'bg-white shadow' : 'text-gray-600 hover:bg-white/50'}`}
-            onClick={() => setView("analytics")}
-          >
-            Analytics
-          </button>
-
-          <button
-            className={`px-3 py-2 rounded-md text-sm font-medium whitespace-nowrap ${view === "inquiries" ? 'bg-white shadow' : 'text-gray-600 hover:bg-white/50'}`}
-            onClick={() => setView("inquiries")}
-          >
-            Inquiries
-          </button>
-
-          <div className="ml-auto">
-            <button onClick={handleLogout} className="px-3 py-2 text-sm text-red-600 hover:underline">Logout</button>
-          </div>
-        </nav>
-
-        {/* ANALYTICS VIEW */}
-        {view === "analytics" && (
-          <>
-            {/* FILTER */}
-            <div className="mb-6">
-              <label className="text-sm text-gray-700 mr-3">Date Range</label>
+            <div className="flex items-center gap-3">
+              <label className="text-sm text-gray-700 hidden sm:inline">Date Range</label>
               <select
                 value={days}
-                onChange={(e) =>
-                  setDays(e.target.value === "all" ? "all" : Number(e.target.value))
-                }
-                className="px-3 py-2 border rounded-md text-sm"
+                onChange={(e) => setDays(e.target.value === "all" ? "all" : Number(e.target.value))}
+                className="px-3 py-2 border rounded-md text-sm bg-white"
+                aria-label="Select date range"
               >
                 <option value="all">All time</option>
                 <option value={7}>Last 7 days</option>
                 <option value={30}>Last 30 days</option>
               </select>
-            </div>
 
-            {/* KPI */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-              <StatCard title="Total Searches" value={searches.total} />
+              <div className="hidden sm:flex items-center gap-2">
+                <button onClick={() => setView("analytics")} className={`px-3 py-2 rounded-md text-sm font-medium ${view === "analytics" ? "bg-white shadow" : "text-gray-600 hover:bg-white/50"}`}>Analytics</button>
+                <button onClick={() => setView("inquiries")} className={`px-3 py-2 rounded-md text-sm font-medium ${view === "inquiries" ? "bg-white shadow" : "text-gray-600 hover:bg-white/50"}`}>Inquiries</button>
+              </div>
+
+              <button onClick={handleLogout} className="px-3 py-2 text-sm text-red-600 hover:underline">Logout</button>
+            </div>
+          </div>
+
+          {/* Mobile view: simpler nav */}
+          <div className="mt-4 sm:hidden flex gap-2">
+            <button onClick={() => setView("analytics")} className={`flex-1 px-3 py-2 rounded-md text-sm ${view === "analytics" ? "bg-white shadow" : "bg-white/60"}`}>Analytics</button>
+            <button onClick={() => setView("inquiries")} className={`flex-1 px-3 py-2 rounded-md text-sm ${view === "inquiries" ? "bg-white shadow" : "bg-white/60"}`}>Inquiries</button>
+          </div>
+        </header>
+
+        {/* Main content */}
+        {view === "analytics" && (
+          <>
+            {/* KPI Cards */}
+            <section className="mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <StatCard
+                title="Total Searches"
+                value={searches.total}
+                subtitle="All-time / selected range"
+              />
 
               <StatCard
                 title="Avg Budget (RWF)"
                 value={Math.round(searches.budgetStats.avgBudget)}
-                subtitle={`Min: ${searches.budgetStats.minBudget} | Max: ${searches.budgetStats.maxBudget}`}
+                subtitle={`Min: ${searches.budgetStats.minBudget} • Max: ${searches.budgetStats.maxBudget}`}
               />
 
               <StatCard
@@ -147,35 +146,74 @@ const AdminDashboard = () => {
                 value={payments.revenue}
                 subtitle={`Conversion: ${payments.conversionRate}`}
               />
-            </div>
-
-            {/* REVENUE */}
-            <section className="mb-6 bg-white rounded-lg p-4 shadow-sm">
-              <RevenueCards payments={payments} />
             </section>
 
-            {/* CHARTS */}
-            <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-              <div className="bg-white p-4 rounded-lg shadow-sm">
-                <PriorityChart data={searches.byPriority} />
+            {/* Revenue — collapsible on mobile */}
+            <section className="mb-6">
+              <div className="flex items-center justify-between">
+                <h2 className="text-lg font-semibold text-gray-900">Revenue</h2>
+                <div className="flex items-center gap-2">
+                  <button className="hidden md:inline-flex text-sm text-gray-500">Summary</button>
+                  <button
+                    className="md:hidden text-sm text-indigo-600"
+                    onClick={() => setRevenueOpen((s) => !s)}
+                    aria-expanded={revenueOpen}
+                  >
+                    {revenueOpen ? "Hide" : "Show"}
+                  </button>
+                </div>
               </div>
-              <div className="bg-white p-4 rounded-lg shadow-sm">
-                <RevenueFunnel searches={searches} payments={payments} />
+
+              <div className={`${revenueOpen ? "mt-4" : "hidden mt-4"} bg-white rounded-lg p-4 shadow-sm`}>
+                <RevenueCards payments={payments} />
               </div>
             </section>
 
-            {/* LIST */}
-            <section className="bg-white rounded-lg p-4 shadow-sm">
-              <PriorityList data={searches.byPriority} />
+            {/* Charts */}
+            <section className="mb-6">
+              <div className="flex items-center justify-between">
+                <h2 className="text-lg font-semibold text-gray-900">Charts</h2>
+                <button className="md:hidden text-sm text-indigo-600" onClick={() => setChartsOpen((s) => !s)} aria-expanded={chartsOpen}>
+                  {chartsOpen ? "Hide" : "Show"}
+                </button>
+              </div>
+
+              <div className={`${chartsOpen ? "mt-4" : "hidden mt-4"} grid grid-cols-1 lg:grid-cols-2 gap-6`}>
+                <div className="bg-white p-4 rounded-lg shadow-sm">
+                  <PriorityChart data={searches.byPriority} />
+                </div>
+                <div className="bg-white p-4 rounded-lg shadow-sm">
+                  <RevenueFunnel searches={searches} payments={payments} />
+                </div>
+              </div>
+            </section>
+
+            {/* Priority list */}
+            <section className="mb-6">
+              <div className="flex items-center justify-between">
+                <h2 className="text-lg font-semibold text-gray-900">Search Priority Breakdown</h2>
+                <button className="md:hidden text-sm text-indigo-600" onClick={() => setListOpen((s) => !s)} aria-expanded={listOpen}>
+                  {listOpen ? "Hide" : "Show"}
+                </button>
+              </div>
+
+              <div className={`${listOpen ? "mt-4" : "hidden mt-4"} bg-white rounded-lg p-4 shadow-sm`}>
+                <PriorityList data={searches.byPriority} />
+              </div>
             </section>
           </>
         )}
 
         {view === "inquiries" && (
-          <div className="mt-4">
+          <section className="bg-white rounded-lg p-4 shadow-sm">
             <AdminInquiries />
-          </div>
+          </section>
         )}
+
+        {/* Small footer */}
+        <footer className="mt-8 text-center text-xs text-gray-500">
+          Realty Spotters Admin • Data refreshes every few minutes • Built for mobile and desktop
+        </footer>
       </div>
     </div>
   );

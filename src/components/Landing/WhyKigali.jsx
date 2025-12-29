@@ -1,43 +1,155 @@
+import React from "react";
+
 const WhyKigali = () => {
   return (
-    <section className="bg-gray-50 py-12 sm:py-16">
+    <section className="bg-gradient-to-b from-white via-indigo-50 to-sky-50 py-12 sm:py-16">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900">Why this matters in Kigali</h2>
-          <p className="mt-3 text-gray-600 max-w-2xl mx-auto">Small differences between neighborhoods shape daily life — from commute times to market access. Here's why a neighborhood-first approach changes the search.</p>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900">
+            Why Kigali? Why it matters for your day-to-day
+          </h2>
+          <p className="mt-3 text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
+            Small differences between neighborhoods shape real life — commute,
+            markets, schools and peace of mind. We make those differences visible
+            so you can choose where life fits best.
+          </p>
         </div>
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
-            <div className="text-indigo-600 w-10 h-10 flex items-center justify-center rounded-md bg-indigo-50">
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M3 6h18M3 14h18M3 18h18"/></svg>
-            </div>
-            <h3 className="mt-4 text-lg font-semibold text-gray-900">Block-by-block pricing</h3>
-            <p className="mt-2 text-sm text-gray-600">Rent varies street-to-street; aggregated listings hide these micro-differences. We show localized estimates.</p>
-          </div>
+          <article className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition transform hover:-translate-y-1">
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0">
+                <div className="w-12 h-12 rounded-lg bg-gradient-to-tr from-indigo-600 to-sky-500 text-white flex items-center justify-center">
+                  <svg
+                    className="w-5 h-5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden
+                  >
+                    <path
+                      d="M3 11.5V21h6v-6h6v6h6V11.5L12 3 3 11.5z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+              </div>
 
-          <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
-            <div className="text-sky-600 w-10 h-10 flex items-center justify-center rounded-md bg-sky-50">
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 1.343-3 3v6h6v-6c0-1.657-1.343-3-3-3z"/></svg>
+              <div className="min-w-0">
+                <h3 className="text-lg font-semibold text-gray-900">
+                  Block-level pricing
+                </h3>
+                <p className="mt-2 text-sm text-gray-600">
+                  Rents vary street-to-street. We surface localized estimates so
+                  you know what to expect before you visit.
+                </p>
+              </div>
             </div>
-            <h3 className="mt-4 text-lg font-semibold text-gray-900">Unbiased recommendations</h3>
-            <p className="mt-2 text-sm text-gray-600">Agents and listings have incentives. We rank neighborhoods purely on data aligned to your needs.</p>
-          </div>
 
-          <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
-            <div className="text-emerald-600 w-10 h-10 flex items-center justify-center rounded-md bg-emerald-50">
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+            <div className="mt-4 flex items-center justify-between text-xs">
+              <span className="text-indigo-600 font-medium">Precision</span>
+              <span className="text-gray-400">Micro-data</span>
             </div>
-            <h3 className="mt-4 text-lg font-semibold text-gray-900">Life, not listings</h3>
-            <p className="mt-2 text-sm text-gray-600">We emphasize daily life — schools, markets, commuting — so recommendations match real routines.</p>
+          </article>
+
+          <article className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition transform hover:-translate-y-1">
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0">
+                <div className="w-12 h-12 rounded-lg bg-gradient-to-tr from-sky-500 to-emerald-400 text-white flex items-center justify-center">
+                  <svg
+                    className="w-5 h-5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden
+                  >
+                    <path
+                      d="M12 2a7 7 0 017 7c0 5-7 13-7 13s-7-8-7-13a7 7 0 017-7z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              <div className="min-w-0">
+                <h3 className="text-lg font-semibold text-gray-900">
+                  Unbiased recommendations
+                </h3>
+                <p className="mt-2 text-sm text-gray-600">
+                  No listing bias. No agent incentives. Rankings are data-aligned
+                  to your priorities.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-4 flex items-center justify-between text-xs">
+              <span className="text-sky-600 font-medium">Objective</span>
+              <span className="text-gray-400">Transparent</span>
+            </div>
+          </article>
+
+          <article className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition transform hover:-translate-y-1">
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0">
+                <div className="w-12 h-12 rounded-lg bg-gradient-to-tr from-emerald-500 to-lime-400 text-white flex items-center justify-center">
+                  <svg
+                    className="w-5 h-5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden
+                  >
+                    <path
+                      d="M3 7h18v13H3zM7 3h10v4H7z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              <div className="min-w-0">
+                <h3 className="text-lg font-semibold text-gray-900">
+                  Life-first insights
+                </h3>
+                <p className="mt-2 text-sm text-gray-600">
+                  Schools, markets, commutes and safety — we weigh what matters
+                  so your choice fits daily routines.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-4 flex items-center justify-between text-xs">
+              <span className="text-emerald-600 font-medium">Practical</span>
+              <span className="text-gray-400">Everyday</span>
+            </div>
+          </article>
+
+          {/* Bonus content row for intrigue on larger screens */}
+          <div className="sm:col-span-2 lg:col-span-3 mt-2">
+            <div className="mt-6 bg-gradient-to-r from-indigo-50 to-sky-50 rounded-2xl p-6 border border-gray-100 shadow-inner flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <div className="flex-1">
+                <h4 className="text-sm font-semibold text-gray-900">
+                  Ready for smarter, local choices?
+                </h4>
+                <p className="mt-1 text-sm text-gray-600">
+                  Try a quick search to see ranked neighborhoods with scores,
+                  estimated rents and short reasoning — tailored to you.
+                </p>
+              </div>
+
+              <div className="flex-shrink-0 mt-3 sm:mt-0">
+                <a
+                  href="/search"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-medium shadow"
+                >
+                  Start a free search
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
         <div className="mt-8 text-center">
-          <p className="text-sm text-gray-600">Ready to see neighborhood recommendations tailored to you?</p>
-          <div className="mt-4">
-            <a href="/search" className="inline-flex items-center px-5 py-3 bg-indigo-600 text-white rounded-md shadow hover:bg-indigo-700">Start a free search</a>
-          </div>
+          <p className="text-xs text-gray-500">
+            No tracking, no spam — just local, data-backed guidance.
+          </p>
         </div>
       </div>
     </section>

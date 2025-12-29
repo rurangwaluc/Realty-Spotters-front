@@ -39,9 +39,8 @@ function App() {
           element={adminAuthed ? <AdminLayout /> : <Navigate to="/admin/login" />}
         >
           <Route path="dashboard" element={
-            <AdminRoute>
+           
               <AdminDashboard />
-            </AdminRoute>
             
             } />
           <Route path="inquiries" element={<AdminInquiries />} />
