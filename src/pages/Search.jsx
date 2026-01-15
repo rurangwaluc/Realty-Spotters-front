@@ -30,34 +30,34 @@ export default function Search() {
   }, [unlocked]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-indigo-50 to-white">
+    <div className="min-h-screen bg-slate-50">
       {/* Polished hero */}
-      <header className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="rounded-2xl bg-gradient-to-r from-indigo-600 via-sky-500 to-emerald-400 text-white p-6 sm:p-8 shadow-2xl overflow-hidden relative">
+      <header className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="rounded-2xl bg-white border border-slate-200 text-slate-900 p-6 sm:p-8 shadow-sm hover:shadow-md overflow-hidden relative">
           <div className="flex flex-col lg:flex-row lg:items-center gap-6">
             <div className="flex-1 max-w-2xl">
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight text-slate-900">
                 Find your perfect neighborhood in{" "}
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-white to-yellow-300">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-amber-400">
                   Kigali
                 </span>{" "}
                 — smarter, faster, local.
               </h1>
 
-              <p className="mt-3 text-indigo-100/95 text-sm sm:text-base">
+              <p className="mt-3 text-slate-600 text-sm sm:text-base">
                 No endless listing browsing — get ranked, data-backed neighborhood
                 recommendations tailored to your budget, bedrooms and lifestyle
                 priority.
               </p>
 
               <div className="mt-4 flex flex-wrap gap-2">
-                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-xs">
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-xs text-slate-800">
                   Data-driven
                 </span>
-                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-xs">
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-xs text-slate-800">
                   Local insights
                 </span>
-                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-xs">
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-xs text-slate-800">
                   Fast results
                 </span>
               </div>
@@ -65,20 +65,19 @@ export default function Search() {
               <div className="mt-5 flex gap-3">
                 <button
                   onClick={() => {
-                    // focus the form on desktop or open mobile filters
                     const el = document.querySelector("#recommendation-form");
                     if (el)
                       el.scrollIntoView({ behavior: "smooth", block: "center" });
                     setShowFilters(true);
                   }}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-white text-indigo-700 font-semibold rounded-lg shadow-sm hover:shadow-md"
+                  className="inline-flex items-center gap-2 px-4 py-3 min-h-[44px] bg-slate-800 text-white font-semibold rounded-lg shadow-sm hover:shadow-md"
                 >
                   Try quick search
                 </button>
 
                 <a
                   href="/pricing"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 text-white rounded-lg font-medium hover:bg-white/30"
+                  className="inline-flex items-center gap-2 px-4 py-3 min-h-[44px] bg-white border border-slate-200 text-slate-800 rounded-lg font-medium hover:brightness-95"
                 >
                   Unlock full recommendations
                 </a>
@@ -87,19 +86,19 @@ export default function Search() {
 
             {/* Decorative featured card */}
             <div className="hidden lg:block lg:w-80">
-              <div className="bg-white/10 p-4 rounded-2xl backdrop-blur-sm border border-white/10">
-                <div className="text-xs text-white/90 font-medium">Featured</div>
+              <div className="bg-white p-4 rounded-2xl border border-slate-200">
+                <div className="text-xs text-slate-700 font-medium">Featured</div>
                 <div className="mt-2">
-                  <div className="text-white font-semibold text-lg">
+                  <div className="text-slate-900 font-semibold text-lg">
                     Kibagabaga
                   </div>
-                  <div className="mt-1 text-white/90 text-sm">
+                  <div className="mt-1 text-slate-600 text-sm">
                     Great for families — parks, schools, short commutes.
                   </div>
                 </div>
-                <div className="mt-3 flex items-center gap-2 text-white text-xs">
-                  <span className="px-2 py-1 rounded bg-white/20">Score 8.6</span>
-                  <span className="px-2 py-1 rounded bg-white/20">
+                <div className="mt-3 flex items-center gap-2 text-slate-700 text-xs">
+                  <span className="px-2 py-1 rounded bg-amber-50 text-amber-500">Score 8.6</span>
+                  <span className="px-2 py-1 rounded bg-slate-50 text-slate-800">
                     Avg rent RWF 350k
                   </span>
                 </div>
@@ -109,7 +108,7 @@ export default function Search() {
 
           {/* subtle abstract shape */}
           <svg
-            className="absolute -right-8 -bottom-8 w-64 opacity-20 transform rotate-12"
+            className="absolute -right-8 -bottom-8 w-64 opacity-12 transform rotate-12"
             viewBox="0 0 200 200"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden
@@ -132,7 +131,7 @@ export default function Search() {
             <div className="md:hidden mb-3">
               <button
                 onClick={() => setShowFilters((s) => !s)}
-                className="w-full inline-flex items-center justify-between px-4 py-2 bg-white rounded-lg shadow-sm text-sm font-medium"
+                className="w-full inline-flex items-center justify-between px-4 py-2 bg-white rounded-lg shadow-sm text-sm font-medium border border-slate-200"
                 aria-expanded={showFilters}
               >
                 <span>{showFilters ? "Hide filters" : "Show quick search"}</span>
@@ -157,7 +156,7 @@ export default function Search() {
             <div
               className={`${
                 showFilters ? "block" : "hidden md:block"
-              } sticky md:top-6 bg-white rounded-lg shadow-sm p-5`}
+              } sticky md:top-6 bg-white rounded-lg shadow-sm p-5 border border-slate-200`}
               id="recommendation-form"
             >
               <h3 className="text-lg font-semibold text-gray-900">
@@ -192,7 +191,7 @@ export default function Search() {
               {/* Results container */}
               <div ref={resultsRef} className="mt-2 space-y-4">
                 {lockedResults.length === 0 && unlocked && (
-                  <div className="rounded-md border border-emerald-200 bg-emerald-50 p-3 font-semibold text-emerald-700">
+                  <div className="rounded-md border border-amber-200 bg-amber-50 p-3 font-semibold text-amber-700">
                     ✅ All recommendations unlocked
                   </div>
                 )}

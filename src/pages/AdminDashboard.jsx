@@ -76,21 +76,21 @@ const AdminDashboard = () => {
   const { searches, payments } = data;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white p-4 sm:p-6 lg:p-8">
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white p-4 sm:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <header className="mb-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 flex items-center gap-3">
-                <span className="inline-block px-2 py-1 rounded bg-indigo-600 text-white text-sm">Admin</span>
+                <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 flex items-center gap-3">
+                  <span className="inline-block px-2 py-1 rounded bg-slate-800 text-white text-sm">Admin</span>
                 Realty Spotters — Analytics
               </h1>
-              <p className="mt-1 text-sm text-gray-600">Live demand, revenue and priority insights — mobile-first admin view.</p>
+                <p className="mt-1 text-sm text-slate-600">Live demand, revenue and priority insights — mobile-first admin view.</p>
             </div>
 
             <div className="flex items-center gap-3">
-              <label className="text-sm text-gray-700 hidden sm:inline">Date Range</label>
+                <label className="text-sm text-slate-700 hidden sm:inline">Date Range</label>
               <select
                 value={days}
                 onChange={(e) => setDays(e.target.value === "all" ? "all" : Number(e.target.value))}
@@ -103,18 +103,21 @@ const AdminDashboard = () => {
               </select>
 
               <div className="hidden sm:flex items-center gap-2">
-                <button onClick={() => setView("analytics")} className={`px-3 py-2 rounded-md text-sm font-medium ${view === "analytics" ? "bg-white shadow" : "text-gray-600 hover:bg-white/50"}`}>Analytics</button>
-                <button onClick={() => setView("inquiries")} className={`px-3 py-2 rounded-md text-sm font-medium ${view === "inquiries" ? "bg-white shadow" : "text-gray-600 hover:bg-white/50"}`}>Inquiries</button>
+                  <button onClick={() => setView("analytics")} className={`px-3 py-2 rounded-md text-sm font-medium ${view === "analytics" ? "bg-white shadow" : "text-slate-600 hover:bg-white/50"}`}>Analytics</button>
+                  <button onClick={() => setView("inquiries")} className={`px-3 py-2 rounded-md text-sm font-medium ${view === "inquiries" ? "bg-white shadow" : "text-slate-600 hover:bg-white/50"}`}>Inquiries</button>
               </div>
 
-              <button onClick={handleLogout} className="px-3 py-2 text-sm text-red-600 hover:underline">Logout</button>
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 text-sm font-semibold text-white bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors"> Logout</button>
+
             </div>
           </div>
 
           {/* Mobile view: simpler nav */}
           <div className="mt-4 sm:hidden flex gap-2">
-            <button onClick={() => setView("analytics")} className={`flex-1 px-3 py-2 rounded-md text-sm ${view === "analytics" ? "bg-white shadow" : "bg-white/60"}`}>Analytics</button>
-            <button onClick={() => setView("inquiries")} className={`flex-1 px-3 py-2 rounded-md text-sm ${view === "inquiries" ? "bg-white shadow" : "bg-white/60"}`}>Inquiries</button>
+              <button onClick={() => setView("analytics")} className={`flex-1 px-3 py-2 rounded-md text-sm ${view === "analytics" ? "bg-white shadow" : "bg-white/60"}`}>Analytics</button>
+              <button onClick={() => setView("inquiries")} className={`flex-1 px-3 py-2 rounded-md text-sm ${view === "inquiries" ? "bg-white shadow" : "bg-white/60"}`}>Inquiries</button>
           </div>
         </header>
 
@@ -151,11 +154,11 @@ const AdminDashboard = () => {
             {/* Revenue — collapsible on mobile */}
             <section className="mb-6">
               <div className="flex items-center justify-between">
-                <h2 className="text-lg font-semibold text-gray-900">Revenue</h2>
+                  <h2 className="text-lg font-semibold text-slate-900">Revenue</h2>
                 <div className="flex items-center gap-2">
-                  <button className="hidden md:inline-flex text-sm text-gray-500">Summary</button>
-                  <button
-                    className="md:hidden text-sm text-indigo-600"
+                    <button className="hidden md:inline-flex text-sm text-slate-500">Summary</button>
+                    <button
+                      className="md:hidden text-sm text-slate-800"
                     onClick={() => setRevenueOpen((s) => !s)}
                     aria-expanded={revenueOpen}
                   >
@@ -172,8 +175,8 @@ const AdminDashboard = () => {
             {/* Charts */}
             <section className="mb-6">
               <div className="flex items-center justify-between">
-                <h2 className="text-lg font-semibold text-gray-900">Charts</h2>
-                <button className="md:hidden text-sm text-indigo-600" onClick={() => setChartsOpen((s) => !s)} aria-expanded={chartsOpen}>
+                  <h2 className="text-lg font-semibold text-slate-900">Charts</h2>
+                  <button className="md:hidden text-sm text-slate-800" onClick={() => setChartsOpen((s) => !s)} aria-expanded={chartsOpen}>
                   {chartsOpen ? "Hide" : "Show"}
                 </button>
               </div>
@@ -191,8 +194,8 @@ const AdminDashboard = () => {
             {/* Priority list */}
             <section className="mb-6">
               <div className="flex items-center justify-between">
-                <h2 className="text-lg font-semibold text-gray-900">Search Priority Breakdown</h2>
-                <button className="md:hidden text-sm text-indigo-600" onClick={() => setListOpen((s) => !s)} aria-expanded={listOpen}>
+                  <h2 className="text-lg font-semibold text-slate-900">Search Priority Breakdown</h2>
+                  <button className="md:hidden text-sm text-slate-800" onClick={() => setListOpen((s) => !s)} aria-expanded={listOpen}>
                   {listOpen ? "Hide" : "Show"}
                 </button>
               </div>
@@ -211,7 +214,7 @@ const AdminDashboard = () => {
         )}
 
         {/* Small footer */}
-        <footer className="mt-8 text-center text-xs text-gray-500">
+          <footer className="mt-8 text-center text-xs text-slate-500">
           Realty Spotters Admin • Data refreshes every few minutes • Built for mobile and desktop
         </footer>
       </div>

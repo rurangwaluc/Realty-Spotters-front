@@ -7,6 +7,15 @@ import {
 import toast from "react-hot-toast";
 import { useState } from "react";
 
+const isValidRwandaMTN = (phone) => {
+  const normalized = phone.startsWith("+")
+    ? phone.replace("+", "")
+    : phone;
+
+  return /^2507\d{8}$/.test(normalized) || /^07\d{8}$/.test(phone);
+};
+
+
 export default function MoMoPayModal({
   searchLogId,
   budget,
@@ -20,9 +29,41 @@ export default function MoMoPayModal({
   const [status, setStatus] = useState("");
   const [error, setError] = useState("");
   const [completed, setCompleted] = useState(false);
-
+Proceed
   const handlePay = async () => {
-    if (!phone) return;
+   
+          if (!phone) {
+        setError("Phone number is required");
+        return;
+      }
+
+      if (!isValidRwandaMTN(phone)) {
+        const message = "Enter a valid MTN number: 07XXXXXXXX or +2507XXXXXXXX";
+        setError(message);
+
+        toast((t) => (
+          <div className="max-w-md w-full bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md shadow-sm flex items-start gap-3">
+            <svg className="w-5 h-5 text-red-600 mt-0.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
+              <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.516 9.81c.75 1.333-.213 2.991-1.743 2.991H4.485c-1.53 0-2.493-1.658-1.743-2.99l5.515-9.81zM11 13a1 1 0 10-2 0 1 1 0 002 0zm-1-8a1 1 0 01.993.883L11 6v4a1 1 0 11-2 0V6a1 1 0 011-1z" clipRule="evenodd" />
+            </svg>
+
+            <div className="flex-1">
+              <div className="font-semibold">Invalid MTN number</div>
+              <div className="text-sm">{message}</div>
+            </div>
+
+            <button
+              onClick={() => toast.dismiss(t.id)}
+              className="ml-3 text-sm font-medium text-red-600"
+            >
+              Close
+            </button>
+          </div>
+        ), { duration: 5000 });
+
+        return;
+      }
+
 
     setError("");
     setLoading(true);
@@ -33,10 +74,18 @@ export default function MoMoPayModal({
     );
 
     try {
+    
+      const normalizedPhone = phone.startsWith("+")
+        ? phone.replace("+", "")
+        : phone.startsWith("07")
+        ? "25" + phone
+        : phone;
+
       const payment = await initiatePayment({
         searchLogId,
-        phoneNumber: phone,
+        phoneNumber: normalizedPhone,
       });
+
 
       setStatus("Waiting for payment confirmation…");
 

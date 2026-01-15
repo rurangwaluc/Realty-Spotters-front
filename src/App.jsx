@@ -6,6 +6,8 @@ import AdminLayout from "./components/Layout/AdminLayout"; // This should be jus
 import AdminLogin from "./pages/AdminLogin";
 import AdminRoute from "./routes/AdminRoute";
 import Help from './pages/Help'; // adjust path if needed
+import HowItWorks from "./pages/HowItWorks";
+import Info from "./pages/Info";
 import Landing from "./pages/Landing";
 import Navbar from "./components/Layout/Navbar"; // Same here, just a navigation component, not a Router
 import Search from "./pages/Search";
@@ -45,6 +47,7 @@ function App() {
             } />
           <Route path="inquiries" element={<AdminInquiries />} />
         </Route>
+          <Route path="/how-it-works" element={<HowItWorks />} />
       </Routes>
     </div>
   );

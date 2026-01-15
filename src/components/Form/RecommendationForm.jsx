@@ -63,23 +63,65 @@ export default function RecommendationForm({ onSubmit, loading }) {
           />
         </div>
 
-        {/* Priority (full width) */}
-        <div className="md:col-span-2">
-          <label htmlFor="priority" className="block text-sm font-medium text-gray-700">
-            Main Lifestyle Priority
-          </label>
-          <select
-            id="priority"
-            value={priority}
-            onChange={(e) => setPriority(e.target.value)}
-            className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-black focus:outline-none"
-          >
-            <option value="family">Family-friendly</option>
-            <option value="quiet">Quiet</option>
-            <option value="nightlife">Nightlife</option>
-            <option value="commute">Easy commute</option>
-          </select>
-        </div>
+          {/* Lifestyle Priority (cards) */}
+          <div className="md:col-span-2">
+            <p className="block text-sm font-medium text-gray-700 mb-2">
+              Main Lifestyle Priority
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {[
+                {
+                  value: "family",
+                  title: "Family-friendly 🏡",
+                  desc: "Safe, calm areas good for families and children",
+                },
+                {
+                  value: "quiet",
+                  title: "Quiet & Peaceful 🌿",
+                  desc: "Very calm places with little noise",
+                },
+                {
+                  value: "nightlife",
+                  title: "Nightlife & Social 🎉",
+                  desc: "Close to bars, cafés, and active evenings",
+                },
+                {
+                  value: "commute",
+                  title: "Easy Commute 🚗",
+                  desc: "Close to main roads and work areas",
+                },
+              ].map((option) => (
+                <label
+                  key={option.value}
+                  className={`flex cursor-pointer gap-3 rounded-md border p-3 transition
+                    ${
+                      priority === option.value
+                        ? "border-black bg-gray-50"
+                        : "border-gray-300 hover:bg-gray-50"
+                    }`}
+                >
+                  <input
+                    type="radio"
+                    name="priority"
+                    value={option.value}
+                    checked={priority === option.value}
+                    onChange={() => setPriority(option.value)}
+                    className="mt-1"
+                  />
+                  <div>
+                    <p className="text-sm font-medium text-gray-800">
+                      {option.title}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {option.desc}
+                    </p>
+                  </div>
+                </label>
+              ))}
+            </div>
+          </div>
+
 
         {/* Submit */}
         <div className="md:col-span-2">
