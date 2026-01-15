@@ -1,3 +1,5 @@
+const API_URL = import.meta.env.VITE_API_URL;
+
 export async function initiatePayment({
   searchLogId,
   phoneNumber,
@@ -9,20 +11,17 @@ export async function initiatePayment({
     throw new Error("searchLogId is required");
   }
 
-  const res = await fetch(
-    "http://localhost:5000/api/payments/initiate",
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        searchLogId,
-        phoneNumber,
-        amount,
-        currency,
-        provider,
-      }),
-    }
-  );
+  const res = await fetch(`${API_URL}/api/payments/initiate`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      searchLogId,
+      phoneNumber,
+      amount,
+      currency,
+      provider,
+    }),
+  });
 
   const data = await res.json();
 
@@ -35,14 +34,11 @@ export async function initiatePayment({
 }
 
 export async function confirmSandboxPayment(reference) {
-  const res = await fetch(
-    "http://localhost:5000/api/payments/confirm-sandbox",
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ reference }),
-    }
-  );
+  const res = await fetch(`${API_URL}/api/payments/confirm-sandbox`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ reference }),
+  });
 
   const data = await res.json();
 
@@ -56,7 +52,7 @@ export async function confirmSandboxPayment(reference) {
 
 export async function unlockRecommendations(payload) {
   const res = await fetch(
-    "http://localhost:5000/api/recommend-neighborhoods/unlock",
+    `${API_URL}/api/recommend-neighborhoods/unlock`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },

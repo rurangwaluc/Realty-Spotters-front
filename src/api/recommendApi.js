@@ -1,6 +1,8 @@
+const API_URL = import.meta.env.VITE_API_URL;
+
 export async function recommendNeighborhoods(payload) {
   const res = await fetch(
-    "http://localhost:5000/api/recommend-neighborhoods",
+    `${API_URL}/api/recommend-neighborhoods`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },

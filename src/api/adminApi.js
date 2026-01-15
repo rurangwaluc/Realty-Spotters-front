@@ -1,7 +1,9 @@
+const API_URL = import.meta.env.VITE_API_URL;
+
 const adminFetch = async (url) => {
   const token = localStorage.getItem("adminToken");
 
-  const res = await fetch(`http://localhost:5000/api/admin${url}`, {
+  const res = await fetch(`${API_URL}/api/admin${url}`, {
     headers: {
       "x-admin-token": token,
     },
