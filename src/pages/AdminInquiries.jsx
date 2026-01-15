@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const AdminInquiries = () => {
   const [inquiries, setInquiries] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -10,7 +12,7 @@ const AdminInquiries = () => {
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch("http://localhost:5000/api/admin/inquiries", {
+        const res = await fetch(`${API_URL}/api/admin/inquiries`, {
           headers: { "x-admin-token": localStorage.getItem("adminToken") },
         });
         if (!res.ok) throw new Error("Failed to fetch");
