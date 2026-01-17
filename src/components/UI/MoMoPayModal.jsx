@@ -87,10 +87,12 @@ export default function MoMoPayModal({
           : phone;
 
       // Step 1: Initiate payment
-      const payment = await initiatePayment({
+     const payment = await initiatePayment({
         searchLogId,
         phoneNumber: normalizedPhone,
+        provider: "momo",
       });
+
 
       setStatus("Waiting for payment confirmation…");
 
@@ -126,6 +128,34 @@ export default function MoMoPayModal({
     }
   };
 
+  const handleEsiciaPay = async () => {
+  if (!phone) {
+    toast.error("Phone number is required");
+    return;
+  }
+
+  setLoading(true);
+
+  try {
+    const res = await initiatePayment({
+      searchLogId,
+      phoneNumber: phone,
+      provider: "esicia",
+    });
+
+    if (res.checkoutUrl) {
+      window.location.href = res.checkoutUrl;
+    } else {
+      toast.error("Unable to initiate ESICIA payment");
+    }
+  } catch (err) {
+    toast.error(err.message || "ESICIA payment failed");
+  } finally {
+    setLoading(false);
+  }
+};
+
+
   return (
     <div className="mt-4 rounded-lg border border-gray-200 bg-white p-4">
       <h4 className="text-lg font-semibold text-gray-800">MTN MoMo Payment</h4>
@@ -152,6 +182,15 @@ export default function MoMoPayModal({
           >
             {loading ? "Processing…" : "Pay RWF 2,000"}
           </button>
+
+          <button
+            onClick={handleEsiciaPay}
+            disabled={loading || !phone}
+            className="mt-3 w-full rounded-md bg-black py-3 font-bold text-white transition hover:bg-gray-900 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            Pay via ESICIA (MoMo / Airtel)
+          </button>
+
         </>
       )}
 
