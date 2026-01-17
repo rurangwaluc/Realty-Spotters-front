@@ -20,23 +20,26 @@ export default function Search() {
 
   const resultsRef = useRef(null);
   const [unlocked, setUnlocked] = useState(false);
-  const [showFilters, setShowFilters] = useState(false); // mobile filter toggle
+  const [showFilters, setShowFilters] = useState(false);
 
-  // Auto-scroll after unlock
+  // Auto-scroll after unlock (mobile-safe)
   useEffect(() => {
     if (unlocked && resultsRef.current) {
-      resultsRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      resultsRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
     }
   }, [unlocked]);
 
   return (
     <div className="min-h-screen bg-slate-50">
-      {/* Polished hero */}
-      <header className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="rounded-2xl bg-white border border-slate-200 text-slate-900 p-6 sm:p-8 shadow-sm hover:shadow-md overflow-hidden relative">
+      {/* Hero */}
+      <header className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+        <div className="relative overflow-hidden rounded-2xl bg-white border border-slate-200 p-5 sm:p-8 shadow-sm hover:shadow-md">
           <div className="flex flex-col lg:flex-row lg:items-center gap-6">
             <div className="flex-1 max-w-2xl">
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight text-slate-900">
+              <h1 className="text-xl sm:text-3xl lg:text-4xl font-extrabold leading-snug text-slate-900">
                 Find your perfect neighborhood in{" "}
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-amber-400">
                   Kigali
@@ -51,43 +54,49 @@ export default function Search() {
               </p>
 
               <div className="mt-4 flex flex-wrap gap-2">
-                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-xs text-slate-800">
+                <span className="px-3 py-1 rounded-full bg-slate-100 text-xs text-slate-800">
                   Data-driven
                 </span>
-                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-xs text-slate-800">
+                <span className="px-3 py-1 rounded-full bg-slate-100 text-xs text-slate-800">
                   Local insights
                 </span>
-                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-xs text-slate-800">
+                <span className="px-3 py-1 rounded-full bg-slate-100 text-xs text-slate-800">
                   Fast results
                 </span>
               </div>
 
-              <div className="mt-5 flex gap-3">
+              <div className="mt-5 flex flex-col sm:flex-row gap-3">
                 <button
                   onClick={() => {
                     const el = document.querySelector("#recommendation-form");
-                    if (el)
-                      el.scrollIntoView({ behavior: "smooth", block: "center" });
+                    if (el) {
+                      el.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center",
+                      });
+                    }
                     setShowFilters(true);
                   }}
-                  className="inline-flex items-center gap-2 px-4 py-3 min-h-[44px] bg-slate-800 text-white font-semibold rounded-lg shadow-sm hover:shadow-md"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-3 min-h-[44px] bg-slate-800 text-white font-semibold rounded-lg shadow-sm hover:shadow-md"
                 >
                   Try quick search
                 </button>
 
                 <a
                   href="/pricing"
-                  className="inline-flex items-center gap-2 px-4 py-3 min-h-[44px] bg-white border border-slate-200 text-slate-800 rounded-lg font-medium hover:brightness-95"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-3 min-h-[44px] bg-white border border-slate-200 text-slate-800 rounded-lg font-medium hover:brightness-95"
                 >
                   Unlock full recommendations
                 </a>
               </div>
             </div>
 
-            {/* Decorative featured card */}
-            <div className="hidden lg:block lg:w-80">
+            {/* Featured card (desktop only) */}
+            <div className="hidden xl:block xl:w-80">
               <div className="bg-white p-4 rounded-2xl border border-slate-200">
-                <div className="text-xs text-slate-700 font-medium">Featured</div>
+                <div className="text-xs text-slate-700 font-medium">
+                  Featured
+                </div>
                 <div className="mt-2">
                   <div className="text-slate-900 font-semibold text-lg">
                     Kibagabaga
@@ -96,8 +105,10 @@ export default function Search() {
                     Great for families — parks, schools, short commutes.
                   </div>
                 </div>
-                <div className="mt-3 flex items-center gap-2 text-slate-700 text-xs">
-                  <span className="px-2 py-1 rounded bg-amber-50 text-amber-500">Score 8.6</span>
+                <div className="mt-3 flex items-center gap-2 text-xs">
+                  <span className="px-2 py-1 rounded bg-amber-50 text-amber-600">
+                    Score 8.6
+                  </span>
                   <span className="px-2 py-1 rounded bg-slate-50 text-slate-800">
                     Avg rent RWF 350k
                   </span>
@@ -106,9 +117,9 @@ export default function Search() {
             </div>
           </div>
 
-          {/* subtle abstract shape */}
+          {/* Decorative shape (hidden on small screens) */}
           <svg
-            className="absolute -right-8 -bottom-8 w-64 opacity-12 transform rotate-12"
+            className="hidden sm:block absolute -right-8 -bottom-8 w-64 opacity-10 rotate-12"
             viewBox="0 0 200 200"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden
@@ -122,26 +133,26 @@ export default function Search() {
         </div>
       </header>
 
-      {/* Main layout */}
+      {/* Main */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Aside / Filters */}
+          {/* Filters */}
           <aside className="lg:col-span-1">
-            {/* Mobile: toggle button */}
             <div className="md:hidden mb-3">
               <button
                 onClick={() => setShowFilters((s) => !s)}
                 className="w-full inline-flex items-center justify-between px-4 py-2 bg-white rounded-lg shadow-sm text-sm font-medium border border-slate-200"
                 aria-expanded={showFilters}
               >
-                <span>{showFilters ? "Hide filters" : "Show quick search"}</span>
+                <span>
+                  {showFilters ? "Hide filters" : "Show quick search"}
+                </span>
                 <svg
-                  className={`h-5 w-5 transform ${
+                  className={`h-5 w-5 transition-transform ${
                     showFilters ? "rotate-180" : ""
                   }`}
                   viewBox="0 0 20 20"
                   fill="currentColor"
-                  aria-hidden
                 >
                   <path
                     fillRule="evenodd"
@@ -152,19 +163,18 @@ export default function Search() {
               </button>
             </div>
 
-            {/* Filters panel: sticky on desktop, collapsible on mobile */}
             <div
+              id="recommendation-form"
               className={`${
                 showFilters ? "block" : "hidden md:block"
-              } sticky md:top-6 bg-white rounded-lg shadow-sm p-5 border border-slate-200`}
-              id="recommendation-form"
+              } md:sticky md:top-6 bg-white rounded-lg shadow-sm p-5 border border-slate-200`}
             >
               <h3 className="text-lg font-semibold text-gray-900">
                 Quick Search
               </h3>
               <p className="mt-2 text-sm text-gray-600">
-                Pick a budget, bedrooms and your top priority. Try different combos
-                for fresh ideas.
+                Pick a budget, bedrooms and your top priority. Try different
+                combos for fresh ideas.
               </p>
 
               <div className="mt-4">
@@ -183,54 +193,43 @@ export default function Search() {
             <div className="space-y-4">
               {freeResults.length > 0 && (
                 <p className="text-sm italic text-gray-500">
-                  Recommendations ranked by budget fit • lifestyle match • bedroom
-                  availability
+                  Recommendations ranked by budget fit • lifestyle match •
+                  bedroom availability
                 </p>
               )}
 
-              {/* Results container */}
-              <div ref={resultsRef} className="mt-2 space-y-4">
+              <div ref={resultsRef} className="space-y-4">
                 {lockedResults.length === 0 && unlocked && (
                   <div className="rounded-md border border-amber-200 bg-amber-50 p-3 font-semibold text-amber-700">
                     ✅ All recommendations unlocked
                   </div>
                 )}
 
-                <div className="space-y-4">
-                  <RecommendationResults results={freeResults} />
-                </div>
+                <RecommendationResults results={freeResults} />
 
-                {/* Paywall area */}
                 {!unlocked && (
-                  <div className="mt-4">
-                    <PaywallNotice
-                      lockedResults={lockedResults}
-                      searchLogId={searchLogId}
-                      budget={budget}
-                      bedrooms={bedrooms}
-                      priority={priority}
-                      onUnlock={(results) => {
-                        setFreeResults(results);
-                        setUnlocked(true);
-                      }}
-                    />
-                  </div>
+                  <PaywallNotice
+                    lockedResults={lockedResults}
+                    searchLogId={searchLogId}
+                    budget={budget}
+                    bedrooms={bedrooms}
+                    priority={priority}
+                    onUnlock={(results) => {
+                      setFreeResults(results);
+                      setUnlocked(true);
+                    }}
+                  />
                 )}
               </div>
 
-              {/* small footer CTA */}
               <div className="mt-6 text-center">
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm text-sm text-gray-700">
                   <svg
                     className="w-4 h-4 text-indigo-600"
                     viewBox="0 0 24 24"
-                    fill="none"
-                    aria-hidden
+                    fill="currentColor"
                   >
-                    <path
-                      d="M12 2l3 6 6 .5-4.5 3.5L19 20l-7-4-7 4 1.5-7L2 8.5 8 8 11 2z"
-                      fill="currentColor"
-                    />
+                    <path d="M12 2l3 6 6 .5-4.5 3.5L19 20l-7-4-7 4 1.5-7L2 8.5 8 8 11 2z" />
                   </svg>
                   Need tailored recommendations? Use the form to get a ranked list
                   for your exact needs.
