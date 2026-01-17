@@ -1,64 +1,93 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function Pricing() {
+  const [plan, setPlan] = useState("one-time"); // placeholder for future toggle
+
   return (
     <div className="min-h-screen bg-slate-50">
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-sm font-medium mb-4">
-            <svg
-              className="w-4 h-4"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden
-            >
-              <path d="M12 2l3 6 6 .5-4.5 3.5L19 20l-7-4-7 4 1.5-7L2 8.5 8 8 11 2z" />
-            </svg>
-            Trusted local recommendations
+      {/* Hero Section */}
+      <header className="py-16 px-6 sm:px-12">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left Column: Text */}
+          <div>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-slate-900">
+              Unlock Full Neighborhood Recommendations
+            </h1>
+            <p className="mt-4 text-lg sm:text-xl text-slate-600">
+              Gain access to all ranked neighborhoods, detailed reasoning, scores, and actionable local insights tailored to your lifestyle.
+            </p>
+
+            <div className="mt-6 flex flex-wrap gap-3">
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-xs font-medium text-slate-800">
+                Data-driven
+              </span>
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-xs font-medium text-slate-800">
+                Local insights
+              </span>
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-xs font-medium text-slate-800">
+                Fast results
+              </span>
+            </div>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 leading-tight">
-            Free vs Unlocked — choose how deep you want to go
-          </h1>
-
-          <p className="mt-3 text-slate-600 text-sm sm:text-base">
-            Start with a free preview, or unlock full ranked neighborhoods with
-            clear reasoning, scores, and estimated rents.
-          </p>
+          {/* Right Column: Decorative Featured Card */}
+          <div className="hidden lg:block">
+  <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-lg text-slate-900 relative">
+    <div className="text-xs font-medium opacity-80">Featured</div>
+    <div className="mt-2">
+      <div className="text-lg font-semibold">Kigali Central</div>
+      <div className="mt-1 text-sm opacity-90 text-slate-700">
+        Perfect for families — parks, schools, and short commutes.
+      </div>
+    </div>
+    <div className="mt-4 flex items-center gap-2 text-xs">
+      <span className="px-2 py-1 rounded bg-amber-50 text-amber-700 font-semibold">Score 9.1</span>
+      <span className="px-2 py-1 rounded bg-slate-100 text-slate-900">Avg rent RWF 400k</span>
+    </div>
+    {/* Decorative shape */}
+    <svg
+      className="absolute -right-8 -bottom-8 w-40 opacity-20 transform rotate-12"
+      viewBox="0 0 200 200"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+    >
+      <path
+        fill="#cbd5e1" // subtle gray instead of white for visibility
+        d="M44.8,-61.8C57.6,-55.9,68.9,-46.2,72.6,-34.8C76.3,-23.4,72.5,-10.2,71.9,3.3C71.3,16.8,73.9,30.9,68.5,42.7C63,54.4,49.4,63.8,35.3,69.6C21.1,75.4,6.5,77.7,-6.2,82C-19,86.3,-31.3,92.6,-44.6,89.8C-57.9,86.9,-72.3,74.9,-77.2,60.3C-82.2,45.6,-77.7,28.3,-74.3,11.2C-70.9,-5.9,-68.7,-21.9,-61.8,-33.8C-54.9,-45.7,-43.4,-53.5,-31.3,-59.6C-19.2,-65.7,-6.4,-70.1,7.1,-74.1C20.7,-78,41.5,-80.6,44.8,-61.8Z"
+        transform="translate(100 100)"
+      />
+    </svg>
+  </div>
+</div>
         </div>
+      </header>
 
-        {/* Pricing cards */}
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-          {/* Free */}
-          <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md">
+      {/* Plans Section */}
+      <main className="max-w-7xl mx-auto px-6 sm:px-12 py-12">
+        <div className="grid gap-8 md:grid-cols-2 items-start">
+          {/* Free Plan */}
+          <article className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all">
             <header className="flex items-start justify-between">
               <div>
-                <h3 className="text-lg font-semibold text-slate-900">Free</h3>
+                <h3 className="text-xl font-semibold text-slate-900">Free</h3>
                 <p className="mt-1 text-sm text-slate-500">
-                  Quick single-match preview
+                  Try a quick single-match search with basic insights
                 </p>
               </div>
               <div className="text-sm font-medium text-slate-700">Free</div>
             </header>
 
-            <ul className="mt-6 space-y-3 text-sm text-slate-700">
+            <ul className="mt-6 space-y-3 text-slate-700 text-sm">
               <li className="flex items-start gap-3">
-                <span className="mt-1 w-5 h-5 flex items-center justify-center rounded-full bg-slate-100 text-xs font-semibold">
-                  ✓
-                </span>
+                <span className="mt-1 inline-flex w-5 h-5 items-center justify-center rounded-full bg-slate-50 text-slate-800 text-xs font-semibold">✓</span>
                 Top neighborhood match
               </li>
               <li className="flex items-start gap-3">
-                <span className="mt-1 w-5 h-5 flex items-center justify-center rounded-full bg-slate-100 text-xs font-semibold">
-                  ✓
-                </span>
+                <span className="mt-1 inline-flex w-5 h-5 items-center justify-center rounded-full bg-slate-50 text-slate-800 text-xs font-semibold">✓</span>
                 Confidence score summary
               </li>
               <li className="flex items-start gap-3">
-                <span className="mt-1 w-5 h-5 flex items-center justify-center rounded-full bg-slate-100 text-xs font-semibold">
-                  ✓
-                </span>
+                <span className="mt-1 inline-flex w-5 h-5 items-center justify-center rounded-full bg-slate-50 text-slate-800 text-xs font-semibold">✓</span>
                 Instant result, no signup
               </li>
             </ul>
@@ -66,59 +95,58 @@ export default function Pricing() {
             <div className="mt-6">
               <a
                 href="/search"
-                className="block w-full text-center px-4 py-2 bg-white border border-slate-200 rounded-md shadow-sm hover:shadow-md min-h-[44px]"
+                className="block w-full text-center px-4 py-3 bg-white border border-slate-200 rounded-lg shadow-sm hover:shadow-md text-slate-800 font-medium transition-all min-h-[44px]"
               >
-                Try free search
+                Try Free Search
               </a>
             </div>
           </article>
 
-          {/* Unlocked */}
-          <article className="relative rounded-3xl p-8 overflow-hidden shadow-sm hover:shadow-md">
-            <div className="absolute inset-0 bg-slate-800" />
-            <div className="relative z-10 text-white">
-              <div className="flex items-start justify-between">
+          {/* Unlocked Plan */}
+          <article className="relative rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all">
+            <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-amber-700 to-amber-400 opacity-95" />
+            <div className="relative z-10 text-white p-8 flex flex-col justify-between h-full">
+              <header className="flex items-start justify-between">
                 <div>
-                  <h3 className="text-lg font-semibold">Unlocked</h3>
-                  <p className="mt-1 text-sm text-amber-100">
-                    Full ranked neighborhoods & reasoning
+                  <h3 className="text-xl font-semibold">Unlocked</h3>
+                  <p className="mt-1 text-amber-100 text-sm">
+                    Full ranked neighborhoods with detailed reasoning
                   </p>
                 </div>
-                <div className="text-sm font-bold">Best value</div>
-              </div>
+                <div className="text-sm font-bold">Best Value</div>
+              </header>
 
               <ul className="mt-6 space-y-3 text-sm">
                 <li className="flex items-start gap-3">
-                  <span className="mt-1">✔</span>
+                  <svg className="w-4 h-4 mt-1 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 00-1.414-1.414L8 11.172 4.707 7.879a1 1 0 10-1.414 1.414l4 4a1 1 0 001.414 0l8-8z" clipRule="evenodd" />
+                  </svg>
                   All ranked neighborhoods
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="mt-1">✔</span>
-                  Detailed reasoning & scores
+                  <svg className="w-4 h-4 mt-1 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 00-1.414-1.414L8 11.172 4.707 7.879a1 1 0 10-1.414 1.414l4 4a1 1 0 001.414 0l8-8z" clipRule="evenodd" />
+                  </svg>
+                  Detailed reasoning & neighborhood scores
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="mt-1">✔</span>
-                  Estimated rents & action-ready advice
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="mt-1">✔</span>
-                  One-time payment, no subscriptions
+                  <svg className="w-4 h-4 mt-1 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 00-1.414-1.414L8 11.172 4.707 7.879a1 1 0 10-1.414 1.414l4 4a1 1 0 001.414 0l8-8z" clipRule="evenodd" />
+                  </svg>
+                  Estimated rents & actionable advice
                 </li>
               </ul>
 
               <div className="mt-6 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
                 <div>
-                  <div className="text-xs text-amber-100">One-time</div>
-                  <div className="mt-1 text-2xl font-extrabold">
-                    RWF 2,000
-                  </div>
+                  <div className="text-xs text-amber-200">One-time</div>
+                  <div className="mt-1 text-2xl font-extrabold">RWF 2,000</div>
                 </div>
-
                 <a
                   href="/search?unlock=true"
-                  className="block w-full sm:w-auto px-4 py-2 bg-white text-slate-800 rounded-md font-medium shadow-sm hover:shadow-md text-center min-h-[44px]"
+                  className="block w-full sm:w-auto text-center px-4 py-3 bg-white text-slate-900 rounded-lg font-semibold shadow hover:shadow-md min-h-[44px]"
                 >
-                  Unlock now
+                  Unlock Now
                 </a>
               </div>
             </div>
@@ -127,50 +155,6 @@ export default function Pricing() {
               Popular
             </div>
           </article>
-        </div>
-
-        {/* Trust row */}
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="flex items-start gap-3 bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <div className="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center">
-              ⚡
-            </div>
-            <div>
-              <div className="text-sm font-semibold">Fast results</div>
-              <div className="text-xs text-slate-500">Minutes, not days</div>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-3 bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <div className="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center">
-              🔍
-            </div>
-            <div>
-              <div className="text-sm font-semibold">
-                Transparent reasoning
-              </div>
-              <div className="text-xs text-slate-500">
-                See why a neighborhood scored
-              </div>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-3 bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <div className="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center">
-              🛡️
-            </div>
-            <div>
-              <div className="text-sm font-semibold">No surprises</div>
-              <div className="text-xs text-slate-500">
-                No hidden fees • One-time payment
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-6 text-center text-sm text-slate-500">
-          Still curious? Try the free flow first — unlock only if you want the
-          full story.
         </div>
       </main>
     </div>
