@@ -10,6 +10,7 @@ import HowItWorks from "./pages/HowItWorks";
 import Info from "./pages/Info";
 import Landing from "./pages/Landing";
 import Navbar from "./components/Layout/Navbar"; // Same here, just a navigation component, not a Router
+import Pricing from "./pages/Pricing";
 import Search from "./pages/Search";
 import { useState } from "react";
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/search" element={<Search />} />
         <Route path="/inquiry" element={<Help />} />
+        <Route path="/pricing" element={<Pricing />} />
 
         {/* Admin login */}
         <Route
